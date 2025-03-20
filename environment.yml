@@ -1,0 +1,51 @@
+name: azureml_env
+channels:
+  - defaults
+dependencies:
+  - python=3.9
+  - pip
+  - setuptools
+  - wheel
+  - ca-certificates
+  - openssl
+  - sqlite
+  - pip:
+      - azure-ai-ml
+      - azure-identity
+      - azure-mgmt-resource
+      - azure-mgmt-storage
+      - azure-storage-blob
+      - azure-storage-file-datalake
+      - azure-storage-file-share
+      - azureml-mlflow
+      - mlflow
+      - numpy
+      - pandas
+      - matplotlib
+      - scikit-learn
+      - joblib
+      - requests
+      - tqdm
+      - pyyaml
+      - pyjwt
+      - cryptography
+      - pyopenssl
+      - msal
+      - msrest
+      - msrestazure
+      - paramiko
+      - docker
+      - flask
+      - fastapi
+      - uvicorn
+      - jinja2
+      - protobuf
+      - pyarrow
+      - jsonschema
+      - packaging
+      - pycparser
+      - google-auth
+      - gitpython
+      - pydantic
+      - python-dotenv
+name: azureml_env
