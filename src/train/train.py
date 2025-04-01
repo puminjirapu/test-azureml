@@ -34,7 +34,7 @@ def parse_args():
 def main(args):
     '''Read train dataset, train model, save trained model'''
     # Read train data
-    train_data = pd.read_parquet(Path(args.train_data))
+    train_data = pd.read_csv(Path(args.train_data))
     print(train_data.head())
     print(train_data.columns)
     # Split the data into input(X) and output(y)

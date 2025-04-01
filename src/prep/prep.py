@@ -13,6 +13,13 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 import mlflow
 
+import mltable
+from mltable import MLTableHeaders, MLTableFileEncoding, DataType
+from azure.ai.ml import MLClient
+from azure.ai.ml.entities import Data
+from azure.ai.ml.constants import AssetTypes
+from azure.identity import DefaultAzureCredential
+
 def parse_args():
     '''Parse input arguments'''
 
@@ -48,8 +55,37 @@ def main(args):
     mlflow.log_metric('test size', test.shape[0])
 
     # Save the datasets as parquet files
-    train.to_parquet(Path(args.train_data) / "train.parquet")
-    test.to_parquet(Path(args.test_data) / "test.parquet")
+    train.to_csv(Path(args.train_data) / "train.csv", index=False)
+    test.to_csv(Path(args.test_data) / "test.csv", index=False)
+
+    train_tbl = mltable.from_delimited_files(
+        paths=[{"file":args.train_data}],
+        delimiter=",",
+        header=MLTableHeaders.all_files_same_headers,
+        infer_column_types=True,
+        include_path_column=False,
+        encoding=MLTableFileEncoding.utf8,
+    )
+
+    mltable_folder = './test-model-trainset'
+    train_tbl.save(mltable_folder)
+
+    subscription_id = "1f42e6e4-f4c5-4e7f-8fc6-f9ff3756daf8"
+    resource_group = "TEST_RESOURCE"
+    workspace = "TEST_WORKSPACE"
+
+    ml_client = MLClient(
+    DefaultAzureCredential(), subscription_id, resource_group, workspace
+    )
+
+    train_asset = Data(
+        path=mltable_folder,
+        type=AssetTypes.MLTABLE,
+        description="Train set of TEST_DATASET",
+        name="houseprice-trainset",
+        version="2",
+    )
+    ml_client.data.create_or_update(train_asset)
 
 
 if __name__ == "__main__":

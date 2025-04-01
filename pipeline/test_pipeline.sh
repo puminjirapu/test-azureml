@@ -17,3 +17,7 @@ python run_pipeline.py \
     --environment_name "TEST_ENV"
 
 python run_pipeline.py --experiment_name "FIRST_TEST" --compute_name "TEST-COMPUTE-INSTANCE-PM" --data_name "TEST_DATASET" --environment_name "TEST_ENV"
+
+python run_pipeline.py --experiment_name "MLFLOW_DEPLOY" --compute_name "TEST-COMPUTE-INSTANCE-PM" --data_name "TEST_DATASET" --environment_name "TEST_ENV"
+
+python run_pipeline.py --experiment_name "TRAIN-PIPELINE-3" --compute_name "TEST-COMPUTE-INSTANCE-PM" --data_name "TEST_DATASET" --environment_name "TEST_ENV"
