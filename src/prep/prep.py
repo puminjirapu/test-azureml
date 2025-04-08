@@ -54,38 +54,38 @@ def main(args):
     mlflow.log_metric('train size', train.shape[0])
     mlflow.log_metric('test size', test.shape[0])
 
-    # Save the datasets as parquet files
+    # Save the datasets as csv files
     train.to_csv(Path(args.train_data) / "train.csv", index=False)
     test.to_csv(Path(args.test_data) / "test.csv", index=False)
 
-    train_tbl = mltable.from_delimited_files(
-        paths=[{"file":args.train_data}],
-        delimiter=",",
-        header=MLTableHeaders.all_files_same_headers,
-        infer_column_types=True,
-        include_path_column=False,
-        encoding=MLTableFileEncoding.utf8,
-    )
+    # train_tbl = mltable.from_delimited_files(
+    #     paths=[{"file":args.train_data}],
+    #     delimiter=",",
+    #     header=MLTableHeaders.all_files_same_headers,
+    #     infer_column_types=True,
+    #     include_path_column=False,
+    #     encoding=MLTableFileEncoding.utf8,
+    # )
 
-    mltable_folder = './test-model-trainset'
-    train_tbl.save(mltable_folder)
+    # mltable_folder = './test-model-trainset'
+    # train_tbl.save(mltable_folder)
 
-    subscription_id = "1f42e6e4-f4c5-4e7f-8fc6-f9ff3756daf8"
-    resource_group = "TEST_RESOURCE"
-    workspace = "TEST_WORKSPACE"
+    # subscription_id = "1f42e6e4-f4c5-4e7f-8fc6-f9ff3756daf8"
+    # resource_group = "puminjirapu-rg"
+    # workspace = "Workspace 2 (workspace-2)"
 
-    ml_client = MLClient(
-    DefaultAzureCredential(), subscription_id, resource_group, workspace
-    )
+    # ml_client = MLClient(
+    # DefaultAzureCredential(), subscription_id, resource_group, workspace
+    # )
 
-    train_asset = Data(
-        path=mltable_folder,
-        type=AssetTypes.MLTABLE,
-        description="Train set of TEST_DATASET",
-        name="houseprice-trainset",
-        version="2",
-    )
-    ml_client.data.create_or_update(train_asset)
+    # train_asset = Data(
+    #     path=mltable_folder,
+    #     type=AssetTypes.MLTABLE,
+    #     description="Train set of TEST_DATASET",
+    #     name="houseprice-trainset",
+    #     version="2",
+    # )
+    # ml_client.data.create_or_update(train_asset)
 
 
 if __name__ == "__main__":

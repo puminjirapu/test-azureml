@@ -21,3 +21,5 @@ python run_pipeline.py --experiment_name "FIRST_TEST" --compute_name "TEST-COMPU
 python run_pipeline.py --experiment_name "MLFLOW_DEPLOY" --compute_name "TEST-COMPUTE-INSTANCE-PM" --data_name "TEST_DATASET" --environment_name "TEST_ENV"
 
 python run_pipeline.py --experiment_name "TRAIN-PIPELINE-3" --compute_name "TEST-COMPUTE-INSTANCE-PM" --data_name "TEST_DATASET" --environment_name "TEST_ENV"
+
+python run_pipeline.py --experiment_name "batch-monitoring" --compute_name "workspace-2-compute" --data_name "houseprice" --environment_name "TEST_ENV"

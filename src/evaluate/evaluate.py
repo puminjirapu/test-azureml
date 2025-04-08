@@ -38,7 +38,7 @@ def main(args):
     '''Read trained model and test dataset, evaluate model and save result'''
 
     # Load the test data
-    test_data = pd.read_parquet(Path(args.test_data))
+    test_data = pd.read_csv(Path(args.test_data) / "test.csv")
     TARGET_COL = 'Rent'
     # Split the data into inputs and outputs
     y_test = test_data[TARGET_COL]
